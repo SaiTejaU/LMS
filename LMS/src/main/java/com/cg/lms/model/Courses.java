@@ -9,7 +9,6 @@ import java.util.*;
 public class Courses {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
 	@Column(name = "course_name")
@@ -42,6 +41,12 @@ public class Courses {
 	    public void setName(String name) {
 	        this.name = name;
 	    }
+		public List<Book> getBooks() {
+			return books;
+		}
+		public void setBooks(List<Book> books) {
+			this.books = books;
+		}
 	
 	
 }
