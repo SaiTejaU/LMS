@@ -22,8 +22,9 @@ public class Courses {
 	
 	
 }
-	public Courses(String name) {
+	public Courses(String name, Long id) {
 		this.name = name;
+		this.id=id;
 	}
 	
 	 public long getId() {

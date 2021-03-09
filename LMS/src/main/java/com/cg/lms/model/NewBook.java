@@ -3,11 +3,11 @@ package com.cg.lms.model;
 import javax.persistence.*;
 
 
-@Entity(name = "books")
-public class Book {
+@Entity(name = "newbooks")
+public class NewBook {
 
-	public Book() {}
-	public Book(String name, String authorName) {
+	public NewBook() {}
+	public NewBook(String name, String authorName) {
 		super();
 		this.name = name;
 		this.authorName = authorName;
