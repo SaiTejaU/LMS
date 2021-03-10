@@ -11,7 +11,7 @@ import com.cg.lms.model.Book;
 import com.cg.lms.model.Courses;
 import com.cg.lms.repo.CourseRepository;
 import com.cg.lms.services.CourseService;
-import com.sun.el.stream.Optional;
+
 
 @Service
 @Transactional
@@ -34,10 +34,13 @@ public class CourseServiceImpl implements CourseService {
 	public boolean deleteCourseById(int courseId) {
 		courseRepository.deleteById((long) courseId);
 		Courses course = courseRepository.findById((long) courseId).get();
+		boolean bool;
 		if(null==course) {
-			return true;
+			bool = true;
 		}else
-			return false;
+			bool = false;
+		
+		return bool;
 	}
 
 	@Override
