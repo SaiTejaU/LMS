@@ -1,5 +1,8 @@
 package com.cg.lms.controller;
 import java.util.List;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +21,13 @@ import com.cg.lms.service.BookService;
 
 @RestController
 public class BookController {
+	private static final Logger logger = LogManager.getLogger(BookController.class);
 	@Autowired
 	BookService service;
 	
 	@GetMapping("/books")
 	public ResponseEntity<List<BookDTO>> getProducts(){
+		logger.info("Logger Implemented");
 		List<BookDTO> booklist = service.getBooks();
 		return new ResponseEntity<>(booklist, HttpStatus.OK);
 	}
