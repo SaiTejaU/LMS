@@ -1,4 +1,4 @@
-package com.cg.lms.service;
+package com.cg.lms.servicesImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

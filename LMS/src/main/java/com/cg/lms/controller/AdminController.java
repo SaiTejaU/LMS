@@ -19,7 +19,7 @@ import com.cg.lms.entity.User;
 import com.cg.lms.exception.UserIdAlreadyExistException;
 import com.cg.lms.exception.UserNotFoundException;
 import com.cg.lms.model.UserDTO;
-import com.cg.lms.service.AdminServiceImpl;
+import com.cg.lms.servicesImpl.AdminServiceImpl;
 
 @RestController
 @RequestMapping("/user")

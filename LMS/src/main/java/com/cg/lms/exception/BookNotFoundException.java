@@ -1,4 +1,4 @@
-package com.cg.lms.service;
+package com.cg.lms.exception;
 
 @SuppressWarnings("serial")
 public class BookNotFoundException extends Exception{

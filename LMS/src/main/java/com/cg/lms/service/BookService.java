@@ -7,7 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.lms.entity.Book;
-import com.cg.lms.exception.BookNotFoundExecption;
+import com.cg.lms.exception.BookNotFoundException;
+
 import com.cg.lms.model.BookDTO;
 import com.cg.lms.repository.BookRepository;
 import com.cg.lms.utils.BookUtils;
@@ -40,14 +41,14 @@ public class BookService {
 		repo.deleteByName(name);
 		return "Book deleted!";
 	}
-	public List<Book> getBookByAuthorName(String authorname) throws BookNotFoundExecption {
+	public List<Book> getBookByAuthorName(String authorname) throws BookNotFoundException {
 		Optional<List<Book>> optional=Optional.ofNullable(repo.findByAuthorName(authorname));
 		if(optional.isPresent()) {
 		return repo.findByAuthorName(authorname);
 		}
 		else
 		{
-			throw new BookNotFoundExecption("Book not found for the given authorname");
+			throw new BookNotFoundException("Book not found for the given authorname");
 		}
 		
 	}
