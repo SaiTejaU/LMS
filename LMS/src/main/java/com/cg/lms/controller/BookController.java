@@ -19,7 +19,7 @@ public class BookController {
 	BookService bookService;
 	       	
 	@GetMapping(value="/getAllBooks")
-	public List<com.cg.lms.Book> getAllBooks()
+	public List<Book> getAllBooks()
 	{
 		return  bookService.listAll();
 	}
