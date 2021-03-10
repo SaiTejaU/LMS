@@ -7,10 +7,10 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cg.lms.model.Book;
-import com.cg.lms.model.Courses;
-import com.cg.lms.repo.CourseRepository;
-import com.cg.lms.services.CourseService;
+import com.cg.lms.entity.Courses;
+import com.cg.lms.entity.Book;
+import com.cg.lms.repository.CourseRepository;
+import com.cg.lms.service.CourseService;
 
 
 @Service

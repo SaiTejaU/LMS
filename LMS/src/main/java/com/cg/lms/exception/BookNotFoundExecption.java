@@ -1,4 +1,4 @@
-package com.cg.lms.execption;
+package com.cg.lms.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

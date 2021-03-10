@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cg.lms.entity.Book;
 import com.cg.lms.model.BookDTO;
 import com.cg.lms.service.BookNotFoundException;
 import com.cg.lms.service.BookService;
@@ -51,6 +52,6 @@ public class BookController {
   @GetMapping(value="/books/{authorName}")
 	public List<Book> getBookByBookAuthorName(@PathVariable String authorName)
 	{
-		return bookService.getBookByAuthorName(authorName);
+		return service.getBookByAuthorName(authorName);
 	}
 }

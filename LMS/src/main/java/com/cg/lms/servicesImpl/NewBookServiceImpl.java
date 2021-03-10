@@ -5,9 +5,9 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cg.lms.model.NewBook;
-import com.cg.lms.repo.NewBookRepository;
-import com.cg.lms.services.NewBookService;
+import com.cg.lms.entity.NewBook;
+import com.cg.lms.repository.NewBookRepository;
+import com.cg.lms.service.NewBookService;
 
 @Service
 @Transactional

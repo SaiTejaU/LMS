@@ -1,4 +1,4 @@
-package com.cg.lms.model;
+package com.cg.lms.entity;
 
 import javax.persistence.*;
 

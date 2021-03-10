@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cg.lms.services.CourseService;
-import com.cg.lms.services.NewBookService;
-import com.cg.lms.model.*;
+import com.cg.lms.entity.Courses;
+import com.cg.lms.entity.NewBook;
+import com.cg.lms.entity.Book;
+import com.cg.lms.service.CourseService;
+import com.cg.lms.service.NewBookService;
 
 @RestController
 @RequestMapping("/courses")

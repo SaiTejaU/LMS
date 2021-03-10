@@ -1,7 +1,7 @@
-package com.cg.lms.services;
+package com.cg.lms.service;
 
 
-import com.cg.lms.model.NewBook;
+import com.cg.lms.entity.NewBook;
 
 public interface NewBookService {
 

@@ -1,9 +1,9 @@
-package com.cg.lms.services;
+package com.cg.lms.service;
 
 import java.util.List;
 
-import com.cg.lms.model.Book;
-import com.cg.lms.model.Courses;
+import com.cg.lms.entity.Courses;
+import com.cg.lms.entity.Book;
 
 public interface CourseService {
 
