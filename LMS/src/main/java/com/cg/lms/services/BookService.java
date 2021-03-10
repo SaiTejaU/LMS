@@ -29,14 +29,28 @@ public class BookService {
 		return repo.findByBookName(name);
 		}
 		else {
+			throw new BookNotFoundExecption("Book not found for the given name");
+		}
+	}
+	public List<Book> getBookByBookId(Integer id) throws BookNotFoundExecption{
+		Optional<List<Book>> optional=Optional.ofNullable(repo.findByBookId(id));
+		if(optional.isPresent()) {
+		return repo.findByBookId(id);
+		}
+		else
+		{
 			throw new BookNotFoundExecption("Book not found for the given id");
 		}
 	}
-	public List<Book> getBookByBookId(Integer id) {
-		return repo.findByBookId(id);
-	}
-	public List<Book> getBookByAuthorName(String authorname) {
+	public List<Book> getBookByAuthorName(String authorname) throws BookNotFoundExecption {
+		Optional<List<Book>> optional=Optional.ofNullable(repo.findByAuthorName(authorname));
+		if(optional.isPresent()) {
 		return repo.findByAuthorName(authorname);
+		}
+		else
+		{
+			throw new BookNotFoundExecption("Book not found for the given authorname");
+		}
 		
 	}
      
