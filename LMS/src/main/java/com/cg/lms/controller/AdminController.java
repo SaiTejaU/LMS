@@ -32,7 +32,7 @@ public class AdminController {
     public List<UserDTO> getAllUsers(){
     	return serv.getAllUsers();
     }  
-    
+  
     @GetMapping("/getAllStudents")
     public List<UserDTO> getAllStudents(String s) {
     	String pattern="ST";

@@ -1,14 +1,13 @@
 package com.cg.lms.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.cg.lms.entity.Book;
 import com.cg.lms.exception.BookNotFoundException;
-
 import com.cg.lms.model.BookDTO;
 import com.cg.lms.repository.BookRepository;
 import com.cg.lms.utils.BookUtils;
@@ -26,30 +25,34 @@ public class BookService {
 		repo.save(BookUtils.convertToBook(bookdto));
 	}
 	public BookDTO getBookByname(String name) throws BookNotFoundException {
-		Optional<Book> optional= repo.findByName(name);
-		if(optional.isPresent()) {
-			Book book= optional.get();
-			return BookUtils.convertToBookDto(book);
+		Book book= repo.findByName(name);
+		if(book==null) {
+			throw new BookNotFoundException("No book found with the given name!");
 		}
 		else {
-			throw new BookNotFoundException("No book found with the given name!");
-			
+			return BookUtils.convertToBookDto(book);
 		}	
 	}
-	public String deleteBookByName(String name) //throws BookNotFoundException
+	public ResponseEntity<Object> deleteBookByName(String name) throws BookNotFoundException
 	{
-		repo.deleteByName(name);
-		return "Book deleted!";
-	}
-	public List<Book> getBookByAuthorName(String authorname) throws BookNotFoundException {
-		Optional<List<Book>> optional=Optional.ofNullable(repo.findByAuthorName(authorname));
-		if(optional.isPresent()) {
-		return repo.findByAuthorName(authorname);
-		}
-		else
+		Book tempbook=repo.findByName(name);
+		if(tempbook==null)
 		{
-			throw new BookNotFoundException("Book not found for the given authorname");
+			throw new BookNotFoundException("No book found with the given author name!");
 		}
-		
+		else {
+			Integer bookid=tempbook.getBookId();
+			repo.deleteById(bookid);
+			return ResponseEntity.ok().build();
+		}
+	}
+	public BookDTO getBookByAuthorName(String authorname) throws BookNotFoundException {
+		Book book= repo.findByAuthorName(authorname);
+		if(book==null) {
+			throw new BookNotFoundException("No book found with the given author name!");
+		}
+		else {
+			return BookUtils.convertToBookDto(book);
+		}	
 	}
 }

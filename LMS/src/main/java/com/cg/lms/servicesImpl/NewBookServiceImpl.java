@@ -24,7 +24,6 @@ public class NewBookServiceImpl implements NewBookService {
 
 	@Override
 	public Iterable<NewBook> getAllNewBooks() {
-		// TODO Auto-generated method stub
 		return newbookrepository.findAll();
 	}
 	     

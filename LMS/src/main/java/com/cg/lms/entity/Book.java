@@ -10,7 +10,7 @@ import javax.persistence.Table;
 public class Book {
 	@Id
 	@Column(name="bookid",unique=true)
-	private String bookId;
+	private Integer bookId;
 	@Column(name="bookname")
 	private String bookName;
 	@Column(name="authorname")
@@ -19,18 +19,10 @@ public class Book {
 	private String bookDescription;
 	@Column(name="bookcount")
 	private Integer bookCount;
-	@Column(name="isavailable")
-	private String isAvailable;
-	public String getIsAvailable() {
-		return isAvailable;
-	}
-	public void setIsAvailable(String isAvailable) {
-		this.isAvailable = isAvailable;
-	}
-	public void setBookId(String bookId) {
+	public void setBookId(Integer bookId) {
 		this.bookId = bookId;
 	}
-	public String getBookId() {
+	public Integer getBookId() {
 		return bookId;
 	}
 	public String getBookName() {
@@ -58,21 +50,13 @@ public class Book {
 	public void setBookCount(Integer bookCount) {
 		this.bookCount = bookCount;
 	}
-	public String isAvailable() {
-		return isAvailable;
-	}
-	public void setAvailable(String isAvailable) {
-		this.isAvailable = isAvailable;
-	}
-	public Book(String bookId, String bookName, String authorName, String bookDescription, Integer bookCount,
-			String isAvailable) {
+	public Book(Integer bookId, String bookName, String authorName, String bookDescription, Integer bookCount) {
 		super();
 		this.bookId = bookId;
 		this.bookName = bookName;
 		this.authorName = authorName;
 		this.bookDescription = bookDescription;
 		this.bookCount = bookCount;
-		this.isAvailable = isAvailable;
 	}
 	public Book() {
 		super();

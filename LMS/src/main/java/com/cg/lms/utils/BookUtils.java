@@ -22,6 +22,8 @@ public class BookUtils {
 		Book book = new Book();
 		book.setBookId(bookdto.getBookId());
 		book.setBookName(bookdto.getBookName());
+		book.setAuthorName(bookdto.getAuthorName());
+		book.setBookDescription(bookdto.getBookDescription());
 		book.setBookCount(bookdto.getBookCount());
 		return book;
 	}
@@ -29,6 +31,8 @@ public class BookUtils {
 		BookDTO bookdto = new BookDTO();
 		bookdto.setBookName(book.getBookName());
 		bookdto.setBookId(book.getBookId());
+		bookdto.setAuthorName(book.getAuthorName());
+		bookdto.setBookDescription(book.getBookDescription());
 		bookdto.setBookCount(book.getBookCount());
 		return bookdto;
 	}
