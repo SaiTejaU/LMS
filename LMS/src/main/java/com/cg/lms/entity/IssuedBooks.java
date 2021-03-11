@@ -16,6 +16,14 @@ public class IssuedBooks {
 	private String userId;
 	@Column(name="dateissued")
 	private String dateIssued;
+	@Column(name="penalty")
+	private Double penalty;
+	public Double getPenalty() {
+		return penalty;
+	}
+	public void setPenalty(Double penalty) {
+		this.penalty = penalty;
+	}
 	public String getBookId() {
 		return bookId;
 	}

@@ -11,17 +11,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.cg.lms.exception.BookNotFoundException;
+import com.cg.lms.exception.BookNotIssuedError;
 import com.cg.lms.exception.NoBooksLeftException;
 import com.cg.lms.model.BookDTO;
 import com.cg.lms.model.IssuedBooksDTO;
-import com.cg.lms.service.BookService;
+import com.cg.lms.servicesimpl.BookServiceImpl;
 
 @RestController
 @RequestMapping("/library")
 public class BookController {
 	@Autowired
-	BookService service; 
-	
+	private BookServiceImpl service; 
+	@GetMapping("/check")
+	public String check(){
+		return "WORKING!!!";
+	}
 	@GetMapping("/getallbooks")
 	public List<BookDTO> getBooks(){
 		return service.getBooks();
@@ -44,8 +48,12 @@ public class BookController {
 	@GetMapping(value="/getbookissued/{bname}")
 	public ResponseEntity<IssuedBooksDTO> getBookIssued(@PathVariable("bname") String name) throws BookNotFoundException, NoBooksLeftException
 	{
-		System.out.println("working \n working in controller");
 		IssuedBooksDTO issuedbookdto = service.getBookIssued(name);
 		return new ResponseEntity<>(issuedbookdto, HttpStatus.OK);
+	}
+	@GetMapping(value="/returnbook/{bookname}")
+	public ResponseEntity<String> returnBook(@PathVariable("bookname")String bookname) throws BookNotIssuedError
+	{
+		return new ResponseEntity<>(service.returnBook(bookname),HttpStatus.OK);	
 	}
 }

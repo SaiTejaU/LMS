@@ -14,11 +14,11 @@ import com.cg.lms.entity.Book;
 import com.cg.lms.exception.BookNotFoundException;
 import com.cg.lms.model.BookDTO;
 import com.cg.lms.repository.BookRepository;
-import com.cg.lms.service.BookService;
+import com.cg.lms.servicesimpl.BookServiceImpl;
 
 class BookServiceTest {
 	@InjectMocks
-	BookService service;
+	BookServiceImpl service;
 	@Mock
 	BookRepository repo;
 	@BeforeEach
@@ -37,7 +37,7 @@ class BookServiceTest {
 		when(repo.findByName(anyString())).thenReturn(book);
 		BookDTO bookdto=service.getBookByname("Fluid Mechanics");
 		assertNotNull(bookdto);
-		assertEquals(101,bookdto.getBookId());
+		assertEquals("101",bookdto.getBookId());
 	}
 	@Test
 	void testGetBookByName_BookNotFoundException()
@@ -61,7 +61,7 @@ class BookServiceTest {
 		when(repo.findByAuthorName(anyString())).thenReturn(book);
 		BookDTO bookdto=service.getBookByAuthorName("SaiTeja");
 		assertNotNull(bookdto);
-		assertEquals(102,bookdto.getBookId());
+		assertEquals("102",bookdto.getBookId());
 		
 	}
 	@Test
