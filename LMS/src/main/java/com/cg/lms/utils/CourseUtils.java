@@ -23,14 +23,14 @@ public class CourseUtils {
 		Courses course = new Courses();
 		course.setId(coursesdto.getId());
 		course.setName(coursesdto.getName());
-		course.setBooks(coursesdto.getBook());
+		course.setCoursebook(coursesdto.getCoursebook());
 		return course;
 	}
 	public static CoursesDTO convertToCoursesDto(Courses course) {
 		CoursesDTO coursesdto = new CoursesDTO();
 		coursesdto.setName(course.getName());
 		coursesdto.setId(course.getId());
-		coursesdto.setBook(course.getBooks());
+		coursesdto.setCoursebook(course.getCoursebook());
 		return coursesdto;
 	}
 		

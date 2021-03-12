@@ -5,13 +5,13 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.cg.lms.entity.Book;
+import com.cg.lms.entity.CourseBooks;
 
 @Component
 public class CoursesDTO {
     private long id;
     private String name;
-    List<Book> book = new ArrayList<>();
+    List<CourseBooks> coursebook = new ArrayList<>();
 	public long getId() {
 		return id;
 	}
@@ -24,11 +24,13 @@ public class CoursesDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public List<Book> getBook() {
-		return book;
+	public List<CourseBooks> getCoursebook() {
+		return coursebook;
 	}
-	public void setBook(List<Book> book) {
-		this.book = book;
+	public void setCoursebook(List<CourseBooks> coursebook) {
+		this.coursebook = coursebook;
 	}
+	
+	
 	
 }

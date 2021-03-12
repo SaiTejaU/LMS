@@ -9,6 +9,8 @@ import java.util.*;
 @Table(name = "courses")
 public class Courses {
 
+	
+	
 	@Id
 	private long id;
 	
@@ -17,7 +19,7 @@ public class Courses {
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "cb_fk", referencedColumnName = "id")
-	List<Book> books = new ArrayList<>();
+	List<CourseBooks> coursebook = new ArrayList<>();
 	
 	public Courses() {
 	
@@ -32,7 +34,14 @@ public class Courses {
 	        return id;
 	    }
 
-	    public void setId(long id) {
+	    
+		public List<CourseBooks> getCoursebook() {
+		return coursebook;
+	}
+	public void setCoursebook(List<CourseBooks> coursebook) {
+		this.coursebook = coursebook;
+	}
+		public void setId(long id) {
 	        this.id = id;
 	    }
 
@@ -43,12 +52,7 @@ public class Courses {
 	    public void setName(String name) {
 	        this.name = name;
 	    }
-		public List<Book> getBooks() {
-			return books;
-		}
-		public void setBooks(List<Book> books) {
-			this.books = books;
-		}
+		
 	
 	
 }
