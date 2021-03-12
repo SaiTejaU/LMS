@@ -1,4 +1,3 @@
-
 package com.cg.lms.controller;
 
 import java.util.List;
@@ -6,6 +5,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +20,7 @@ import com.cg.lms.entity.Courses;
 
 import com.cg.lms.entity.RequestedBook;
 import com.cg.lms.exception.CourseNotFoundException;
+
 import com.cg.lms.model.CoursesDTO;
 import com.cg.lms.model.RequestedBookDTO;
 import com.cg.lms.entity.CourseBooks;
@@ -53,6 +54,12 @@ public class CourseController {
 	public Courses createCourse(@RequestBody CoursesDTO coursedto) {
 		logger.info("Entered controller create course");
 		 return courseService.createCourse(coursedto);
+	}
+	@PostMapping("/createmultiplecourse")
+
+	public ResponseEntity<String> addMultipleCourses(@RequestBody List<CoursesDTO> coursesdto) {
+		courseService.addMultipleCourses(coursesdto);
+		return new ResponseEntity<>("Coursess added successfully!", HttpStatus.OK);
 	}
 	
 	@GetMapping("/newbook")

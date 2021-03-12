@@ -36,5 +36,12 @@ public class BookUtils {
 		bookdto.setBookCount(book.getBookCount());
 		return bookdto;
 	}
+	public static List<Book> convertToBookList(List<BookDTO> dtolist)
+	{
+		List<Book> list= new ArrayList<>();
+		for(BookDTO book:dtolist)
+			list.add(convertToBook(book));
+		return list;
+	}
 		
 }

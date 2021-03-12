@@ -69,11 +69,26 @@ public class AdminServiceImpl {
     		throw new UserIdAlreadyExistException("UserId already exist");
     	}    		
     }
+    public List<User> createMultipleUsers(List<UserDTO> userdto) {
+    	List<User> user=AdminUtils.convertToUserList(userdto);
+    	for(User u:user)
+    	{
+        	if(repo.existsById(u.getUserId())) {
+        		throw new UserIdAlreadyExistException("UserId already exist");
+        		}
+        		
+        	else {
+        		repo.save(u);
+        	} 
+    	}  
+    	return user;
+    }
     
     public User updateUser(String userId, UserDTO userdto) throws UserNotFoundException {
         	Optional<User> opt= repo.findById(userId);
         	User user=new User();
-        	if(opt.isPresent()) {        	
+        	if(opt.isPresent()) {  
+        	user.setUserId(userdto.getUserId());
             user.setfName(userdto.getfName());
             user.setlName(userdto.getlName());
             user.setContactno(userdto.getContactno());

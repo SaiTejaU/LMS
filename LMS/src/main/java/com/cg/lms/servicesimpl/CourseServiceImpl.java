@@ -14,10 +14,13 @@ import org.springframework.stereotype.Service;
 import com.cg.lms.entity.Courses;
 
 import com.cg.lms.exception.CourseNotFoundException;
+
 import com.cg.lms.model.CoursesDTO;
+
 import com.cg.lms.entity.CourseBooks;
 import com.cg.lms.repository.CourseRepository;
 import com.cg.lms.service.CourseService;
+
 import com.cg.lms.utils.CourseUtils;
 
 
@@ -44,6 +47,18 @@ public class CourseServiceImpl implements CourseService {
 		return courseRepository.save(course);
 	}
 	
+public List<Courses> addMultipleCourses(List<CoursesDTO> coursesdto) {
+		
+		List<Courses> courses=CourseUtils.convertToCoursesList(coursesdto);
+		for(Courses c:courses)
+		{
+			courseRepository.save(c);
+		}
+		return courses;
+		//return repo.save(BookUtils.convertToBook((BookDTO) bookdto));
+		
+	}
+	
 	@Override
 	public ResponseEntity<Object> deleteCourseById(Integer userId) throws CourseNotFoundException {
 		logger.info("entered service in delete courses");
@@ -53,6 +68,7 @@ public class CourseServiceImpl implements CourseService {
     		return ResponseEntity.ok().build();
     	}).orElseThrow(()-> new CourseNotFoundException("CourseId "+courseID+" not found"));
     }
+	
 
 	@Override
 	public Courses updateCoursesById(Integer courseId, List<CourseBooks> coursebook) throws CourseNotFoundException {

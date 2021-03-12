@@ -1,6 +1,7 @@
 package com.cg.lms.entity;
 
 import javax.persistence.Column;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -9,7 +10,7 @@ import javax.persistence.Table;
 @Table(name="booktable")
 public class Book {
 	@Id
-	@Column(name="bookid",unique=true)
+	@Column(name="bookid")
 	private String bookId;
 	@Column(name="bookname")
 	private String bookName;
@@ -19,12 +20,15 @@ public class Book {
 	private String bookDescription;
 	@Column(name="bookcount")
 	private Integer bookCount;
-	public void setBookId(String bookId) {
-		this.bookId = bookId;
-	}
+	
 	public String getBookId() {
 		return bookId;
 	}
+	
+	public void setBookId(String bookId) {
+		this.bookId = bookId;
+	}
+
 	public String getBookName() {
 		return bookName;
 	}
@@ -50,9 +54,8 @@ public class Book {
 	public void setBookCount(Integer bookCount) {
 		this.bookCount = bookCount;
 	}
-	public Book(String bookId, String bookName, String authorName, String bookDescription, Integer bookCount) {
+	public Book(String bookName, String authorName, String bookDescription, Integer bookCount) {
 		super();
-		this.bookId = bookId;
 		this.bookName = bookName;
 		this.authorName = authorName;
 		this.bookDescription = bookDescription;

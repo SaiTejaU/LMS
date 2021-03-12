@@ -69,6 +69,11 @@ public class AdminController {
     	return serv.createUser(userdto);
 
     }
+    @PostMapping("/createMultipleUsers")
+    public List<User> createMultipleUsers(@RequestBody List<UserDTO> userdto){    	
+    	return serv.createMultipleUsers(userdto);
+
+    }
 
     @PutMapping("/updateUser/{userId}")
     public ResponseEntity<Object> updateUserById(@PathVariable("userId") String userId, @RequestBody UserDTO userdto) throws UserNotFoundException {

@@ -35,6 +35,12 @@ public class BookController {
 		service.addBook(bookdto);
 		return new ResponseEntity<>("Book added successfully!", HttpStatus.OK);
 	}
+	@PostMapping("/addmultiplebooks")
+	public ResponseEntity<String> addMultipleBooks(@RequestBody List<BookDTO> bookdto) {
+		service.addMultipleBooks(bookdto);
+		return new ResponseEntity<>("Books added successfully!", HttpStatus.OK);
+	}
+	
 	@GetMapping(value="/getbyname/{pname}")
 	public ResponseEntity<BookDTO> getBookbyName(@PathVariable("pname")String name) throws BookNotFoundException{
 		BookDTO bookdto=service.getBookByname(name);

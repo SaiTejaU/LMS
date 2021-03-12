@@ -16,6 +16,7 @@ public interface AdminService {
     public UserDTO getUserById(String userId);   
     public UserDTO getUserByEmail(String email);
     public User createUser(UserDTO userdto);
+    public List<User> createMultipleUsers(List<UserDTO> userdto);
     public User updateUserById(String userId, UserDTO userdto);
     public ResponseEntity<String> deleteUserById(String userId);   	   
 }

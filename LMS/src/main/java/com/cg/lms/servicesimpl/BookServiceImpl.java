@@ -31,6 +31,19 @@ public class BookServiceImpl implements BookService{
 	public void addBook(BookDTO bookdto) {
 		repo.save(BookUtils.convertToBook(bookdto));
 	}
+	
+	public List<Book> addMultipleBooks(List<BookDTO> bookdto) {
+		
+		List<Book> book=BookUtils.convertToBookList(bookdto);
+		for(Book b:book)
+		{
+			repo.save(b);
+		}
+		return book;
+		//return repo.save(BookUtils.convertToBook((BookDTO) bookdto));
+		
+	}
+	
 	public BookDTO getBookByname(String name) throws BookNotFoundException {
 		Book book= repo.findByName(name);
 		if(book==null) {

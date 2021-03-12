@@ -2,7 +2,7 @@ package com.cg.lms.service;
 
 import java.util.List;
 
-
+import com.cg.lms.entity.Book;
 import com.cg.lms.exception.BookNotFoundException;
 import com.cg.lms.exception.BookNotIssuedError;
 import com.cg.lms.exception.NoBooksLeftException;
@@ -16,4 +16,5 @@ public interface BookService {
 	public BookDTO getBookByAuthorName(String authorname) throws BookNotFoundException;
 	public IssuedBooksDTO getBookIssued(String bookname) throws BookNotFoundException, NoBooksLeftException ;
 	public String returnBook(String bookname) throws BookNotIssuedError;
+	public List<Book> addMultipleBooks(List<BookDTO> bookdto);
 }

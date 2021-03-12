@@ -14,6 +14,12 @@ public class AdminUtils {
 				dtolist.add(convertToUserDto(user));
 			return dtolist;
 		}
+		public static List<User> convertToUserList(List<UserDTO> dtolist){
+			List<User> list = new ArrayList<>();
+			for(UserDTO user : dtolist) 
+				list.add(convertToUser(user));
+			return list;
+		}
 		public static User convertToUser(UserDTO userdto) {
 			User u=new User();
 			u.setUserId(userdto.getUserId());

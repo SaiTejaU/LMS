@@ -16,5 +16,5 @@ public interface CourseService {
 	Courses createCourse(CoursesDTO coursedto);
 	public ResponseEntity<Object> deleteCourseById(Integer courseId) throws CourseNotFoundException;
 	Courses updateCoursesById(Integer courseId, List<CourseBooks> coursebook) throws CourseNotFoundException;
-
+	public List<Courses> addMultipleCourses(List<CoursesDTO> coursesdto);
 }
