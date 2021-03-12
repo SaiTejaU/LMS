@@ -11,7 +11,7 @@ import com.cg.lms.model.IssuedBooksDTO;
 
 public interface BookService {
 	public List<BookDTO> getBooks();
-	public void addBook(BookDTO bookdto);
+	public Book addBook(BookDTO bookdto);
 	public BookDTO getBookByname(String name) throws BookNotFoundException ;
 	public BookDTO getBookByAuthorName(String authorname) throws BookNotFoundException;
 	public IssuedBooksDTO getBookIssued(String bookname) throws BookNotFoundException, NoBooksLeftException ;

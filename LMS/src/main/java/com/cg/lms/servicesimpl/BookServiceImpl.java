@@ -28,8 +28,8 @@ public class BookServiceImpl implements BookService{
 		List<Book> booklist= repo.findAll();
 		return BookUtils.convertToBookDtoList(booklist);
 	}
-	public void addBook(BookDTO bookdto) {
-		repo.save(BookUtils.convertToBook(bookdto));
+	public Book addBook(BookDTO bookdto) {
+		return repo.save(BookUtils.convertToBook(bookdto));
 	}
 	
 	public List<Book> addMultipleBooks(List<BookDTO> bookdto) {
@@ -83,21 +83,28 @@ public class BookServiceImpl implements BookService{
 	}
 	@Override
 	public String returnBook(String bookname) throws BookNotIssuedError {
-		IssuedBooksDTO bookdto=IssuedBookUtils.convertToIssuedBooksDTO(issuedrepo.findById(bookname).get());
-		if(!issuedrepo.existsById(bookname))
+		Book book=repo.findByName(bookname);
+		String id=book.getBookId();
+		IssuedBooksDTO bookdto=IssuedBookUtils.convertToIssuedBooksDTO(issuedrepo.findById(id).get());
+		if(!issuedrepo.existsById(id))
 		{
 			throw new BookNotIssuedError("You didn't got this book issued yet!");
 		}
 		else if(bookdto.getPenalty()>0.0)
 		{
+			Double penalty=bookdto.getPenalty();
 			issuedrepo.delete(IssuedBookUtils.convertToIssuedBooks(bookdto));
-			return "Book successfully returned!";
+			book.setBookCount(book.getBookCount()+1);
+			repo.save(book);
+			return "Book returned.\nYou have a penalty of "+penalty+". Please pay it by visiting the office!";
 		}
 		else
 		{
-			Double penalty=bookdto.getPenalty();
 			issuedrepo.delete(IssuedBookUtils.convertToIssuedBooks(bookdto));
-			return "Book returned.\nYou have a penalty of "+penalty+". Please pay it by visiting the office!";
+			book.setBookCount(book.getBookCount()+1);
+			repo.save(book);
+			return "Book successfully returned!";
+			
 		}
 	}
 	

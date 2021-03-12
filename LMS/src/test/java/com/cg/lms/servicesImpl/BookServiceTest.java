@@ -1,13 +1,18 @@
 package com.cg.lms.servicesImpl;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import com.cg.lms.entity.Book;
@@ -15,6 +20,7 @@ import com.cg.lms.exception.BookNotFoundException;
 import com.cg.lms.model.BookDTO;
 import com.cg.lms.repository.BookRepository;
 import com.cg.lms.servicesimpl.BookServiceImpl;
+import com.cg.lms.utils.BookUtils;
 
 class BookServiceTest {
 	@InjectMocks
@@ -73,4 +79,31 @@ class BookServiceTest {
 					service.getBookByAuthorName("SaiTeja");
 				}
 				);
-	}}
+	}
+
+@Test
+void testaddBook() {
+	BookDTO book = new BookDTO();
+	book.setBookId("103");
+	book.setBookName("Programming");
+	book.setAuthorName("JK");
+	book.setBookCount(33);
+	book.setBookDescription("Year of Publication:2006");
+	Book newbook1 = BookUtils.convertToBook(book);
+	when(repo.saveAndFlush(newbook1)).thenReturn(BookUtils.convertToBook(book));
+	assertThat(service.addBook(BookUtils.convertToBookDto(newbook1))).isEqualTo(book);
+
+}
+void testaddmultipleBooks()
+{
+	Book book = new Book();
+	List<Book> list=new ArrayList<Book>();
+	book.setBookId("103");
+	book.setBookName("Programming");
+	book.setAuthorName("JK");
+	book.setBookCount(33);
+	book.setBookDescription("Year of Publication:2006");
+	list.add(book);	
+	when(service.addMultipleBooks(BookUtils.convertToBookDtoList(list))).thenReturn(list);	
+}
+}

@@ -36,7 +36,7 @@ public class IssuedBooksServiceImpl implements IssuedBooksService{
 			Date today=new Date(System.currentTimeMillis());
 			if(today.getTime()-issueDate.getTime()>limitDays)
 			{
-				book.setPenalty(book.getPenalty()+(today.getTime()-issueDate.getTime())*finePerDay);
+				book.setPenalty(book.getPenalty()+((today.getTime()-issueDate.getTime())/1000/60/60/24)*finePerDay);
 				issuedrepo.save(IssuedBookUtils.convertToIssuedBooks(book));
 			}
 		}

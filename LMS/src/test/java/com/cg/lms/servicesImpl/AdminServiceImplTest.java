@@ -16,12 +16,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import com.cg.lms.entity.Book;
 import com.cg.lms.entity.User;
 import com.cg.lms.exception.UserNotFoundException;
 import com.cg.lms.model.UserDTO;
 import com.cg.lms.repository.AdminRepository;
 import com.cg.lms.servicesimpl.AdminServiceImpl;
 import com.cg.lms.utils.AdminUtils;
+import com.cg.lms.utils.BookUtils;
 
 class AdminServiceImplTest {
 	@InjectMocks
@@ -71,15 +73,9 @@ class AdminServiceImplTest {
 		assertEquals("Sai",userdto.getfName());
 	}
 	@Test
-	void testGetUserById_UserNotFoundException(){
-		User user= new User();
-		user.setUserId("AD0002");
-		user.setfName("Sai");
-		user.setlName("Teja");
-		user.setEmail("saiteja@gmail.com");
-		user.setPassword("Sai@2799");
-		user.setContactno("9745631120");
-		when(repo.findById( anyString()).get()).thenReturn(user);
+	void testGetUserById_UserNotFoundException() throws UserNotFoundException {
+		
+		when(repo.findById(anyString())).thenReturn(null);
 		assertThrows(UserNotFoundException.class,
 				()-> {
 					service.getUserById("AD0002");
@@ -114,19 +110,67 @@ class AdminServiceImplTest {
 	@Test
 	void testCreateUser()
 	{
-		User user=new User();
+		UserDTO user=new UserDTO();
 		user.setUserId("AD0003");
 		user.setfName("Sai");
 		user.setlName("Teja");
 		user.setEmail("saiteja@gmail.com");
 		user.setPassword("Sai@2799");
 		user.setContactno("9745631120");
-		User savedUser=repo.saveAndFlush(new User("AD0003","Sai","Teja","saiteja@gmail.com","Sai@2799","9876543210"));
-		assertEquals(user.getContactno(),savedUser.getContactno());
+		User u=AdminUtils.convertToUser(user);
+		when(repo.saveAndFlush(u)).thenReturn(AdminUtils.convertToUser(user));
+		assertThat(service.createUser(AdminUtils.convertToUserDto(u))).isEqualTo(user);
+	}
+	@Test
+	void testgetAllLibrarians() {
+
+		User user1=new User();
+		user1.setUserId("LB0003");
+		user1.setfName("Niha");
+		user1.setlName("Tomas");
+		user1.setEmail("tomas@gail.com");
+		user1.setPassword("niha@2799");
+		user1.setContactno("8639345871");			 
+		List<User> list = new ArrayList<>();
+		list.add(user1);
+
+		when( repo.findAll()).thenReturn(list);	       
+		assertThat(service.getAllLibrarians(null)).isEqualTo(AdminUtils.convertToUserDtoList(list));
 	}
 	
-	
-	
+	@Test
+	void testgetAllStudents() {
+
+		User user1=new User();
+		user1.setUserId("ST0003");
+		user1.setfName("Niha");
+		user1.setlName("Tomas");
+		user1.setEmail("tomas@gail.com");
+		user1.setPassword("niha@2799");
+		user1.setContactno("8639345871");			 
+		List<User> list = new ArrayList<>();
+		list.add(user1);
+
+		when( repo.findAll()).thenReturn(list);	       
+		assertThat(service.getAllStudents(null)).isEqualTo(AdminUtils.convertToUserDtoList(list));
+	}
+	@Test
+	void testgetAllInstructors() {
+
+		User user1=new User();
+		user1.setUserId("IS0003");
+		user1.setfName("Niha");
+		user1.setlName("Tomas");
+		user1.setEmail("tomas@gail.com");
+		user1.setPassword("niha@2799");
+		user1.setContactno("8639345871");			 
+		List<User> list = new ArrayList<>();
+		list.add(user1);
+
+		when( repo.findAll()).thenReturn(list);	       
+		assertThat(service.getAllInstructors(null)).isEqualTo(AdminUtils.convertToUserDtoList(list));
+	}
+	 
 	
 	
 }

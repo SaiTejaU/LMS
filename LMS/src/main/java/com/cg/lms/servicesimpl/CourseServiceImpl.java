@@ -47,17 +47,7 @@ public class CourseServiceImpl implements CourseService {
 		return courseRepository.save(course);
 	}
 	
-public List<Courses> addMultipleCourses(List<CoursesDTO> coursesdto) {
-		
-		List<Courses> courses=CourseUtils.convertToCoursesList(coursesdto);
-		for(Courses c:courses)
-		{
-			courseRepository.save(c);
-		}
-		return courses;
-		//return repo.save(BookUtils.convertToBook((BookDTO) bookdto));
-		
-	}
+
 	
 	@Override
 	public ResponseEntity<Object> deleteCourseById(Integer userId) throws CourseNotFoundException {

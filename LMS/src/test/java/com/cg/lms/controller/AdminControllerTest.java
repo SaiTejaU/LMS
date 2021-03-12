@@ -164,7 +164,7 @@ class AdminControllerTest {
 		when(service.getAllInstructors(pattern)).thenReturn(List);	       
 		assertThat(service.getAllInstructors(pattern)).isEqualTo(List);		 
 	}
-	/* @Test
+	 @Test
  void testCreateUser() {
  	User user1=new User();
    	user1.setUserId("IS0008");
@@ -175,6 +175,6 @@ user1.setPassword("niha@2799");
 user1.setContactno("8639345871");
  when(service.createUser(AdminUtils.convertToUserDto(user1))).thenReturn(AdminUtils.convertToUser(userdto));
  assertThat(service.createUser(AdminUtils.convertToUserDto(user1))).isEqualTo(userdto);		
- }*/
+ }
 
 }

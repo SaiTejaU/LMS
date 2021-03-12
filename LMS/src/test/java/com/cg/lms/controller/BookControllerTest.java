@@ -1,4 +1,5 @@
 package com.cg.lms.controller;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -6,12 +7,16 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.stubbing.OngoingStubbing;
 
 import com.cg.lms.entity.Book;
+
 import com.cg.lms.exception.BookNotFoundException;
 import com.cg.lms.model.BookDTO;
+
 import com.cg.lms.service.BookService;
 import com.cg.lms.utils.BookUtils;
+
 
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
@@ -89,6 +94,30 @@ class BookControllerTest {
 		when(service.getBooks()).thenReturn(List);
 		assertThat(service.getBooks()).isEqualTo(List);
 	}
+	
+
+
+	@Test
+	void testaddnewbook() {
+		Book book1=new Book();
+		book1.setBookId("100");
+		book1.setBookName("Structural Analysis");
+		book1.setAuthorName("Teraja");
+		book1.setBookCount(20);
+		book1.setBookDescription("Year of Publication:2000");
+		
+		Book book2=new Book();
+		book2.setBookId("120");
+		book2.setBookName("Structure of Materials");
+		book2.setAuthorName("Agarwal");
+		book2.setBookCount(23);
+		book2.setBookDescription("Year of Publication:2001");
+		
+	
+		OngoingStubbing<List<BookDTO>> thenReturn = when(service.getBooks()).thenReturn((List<BookDTO>) book1);
+		assertThat(service.getBooks()).isEqualTo(book2);
+	}
+
 	
 
 }

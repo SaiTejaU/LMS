@@ -55,12 +55,7 @@ public class CourseController {
 		logger.info("Entered controller create course");
 		 return courseService.createCourse(coursedto);
 	}
-	@PostMapping("/createmultiplecourse")
-
-	public ResponseEntity<String> addMultipleCourses(@RequestBody List<CoursesDTO> coursesdto) {
-		courseService.addMultipleCourses(coursesdto);
-		return new ResponseEntity<>("Coursess added successfully!", HttpStatus.OK);
-	}
+	
 	
 	@GetMapping("/newbook")
 	public List<RequestedBookDTO> getAllRequestedBooks(){
