@@ -3,9 +3,7 @@ package com.cg.lms.utils;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import com.cg.lms.entity.Courses;
-
 import com.cg.lms.model.CoursesDTO;
 
 public class CourseUtils {
@@ -25,23 +23,17 @@ public class CourseUtils {
 		Courses course = new Courses();
 		course.setId(coursesdto.getId());
 		course.setName(coursesdto.getName());
-		course.setCoursebook(coursesdto.getCoursebook());
+		course.setTextBook(coursesdto.getTextBook());
+		course.setRefBook(coursesdto.getRefBook());
 		return course;
 	}
 	public static CoursesDTO convertToCoursesDto(Courses course) {
 		CoursesDTO coursesdto = new CoursesDTO();
 		coursesdto.setName(course.getName());
 		coursesdto.setId(course.getId());
-		coursesdto.setCoursebook(course.getCoursebook());
+		coursesdto.setTextBook(course.getTextBook());
+		coursesdto.setRefBook(course.getRefBook());
 		return coursesdto;
 	}
-	public static List<Courses> convertToCoursesList(List<CoursesDTO> dtolist)
-	{
-		List<Courses> list= new ArrayList<>();
-		for(CoursesDTO courses:dtolist)
-			list.add(convertToCourses(courses));
-		return list;
-	}
-	
 		
 }

@@ -35,7 +35,7 @@ class BookServiceTest {
 	@Test
 	void testGetBookByName() throws BookNotFoundException {
 		Book book=new Book();
-		book.setBookId("101");
+		book.setBookId(101);
 		book.setBookName("Java");
 		book.setAuthorName("Moni");
 		book.setBookCount(30);		
@@ -59,7 +59,7 @@ class BookServiceTest {
 	void testGetBookByAuthorName() throws BookNotFoundException
 	{
 		Book book=new Book();
-		book.setBookId("102");
+		book.setBookId(102);
 		book.setBookName("Programming");
 		book.setAuthorName("Shanthiya");
 		book.setBookCount(33);
@@ -84,7 +84,7 @@ class BookServiceTest {
 @Test
 void testaddBook() {
 	BookDTO book = new BookDTO();
-	book.setBookId("103");
+	book.setBookId(103);
 	book.setBookName("Programming");
 	book.setAuthorName("JK");
 	book.setBookCount(33);
@@ -98,7 +98,7 @@ void testaddmultipleBooks()
 {
 	Book book = new Book();
 	List<Book> list=new ArrayList<Book>();
-	book.setBookId("103");
+	book.setBookId(103);
 	book.setBookName("Programming");
 	book.setAuthorName("JK");
 	book.setBookCount(33);

@@ -16,14 +16,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import com.cg.lms.entity.Book;
 import com.cg.lms.entity.User;
 import com.cg.lms.exception.UserNotFoundException;
 import com.cg.lms.model.UserDTO;
 import com.cg.lms.repository.AdminRepository;
 import com.cg.lms.servicesimpl.AdminServiceImpl;
 import com.cg.lms.utils.AdminUtils;
-import com.cg.lms.utils.BookUtils;
 
 class AdminServiceImplTest {
 	@InjectMocks

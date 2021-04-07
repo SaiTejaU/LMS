@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import com.cg.lms.entity.IssuedBooks;
 
 @Repository
-public interface IssuedBooksRepository  extends JpaRepository<IssuedBooks,String>{
+public interface IssuedBooksRepository  extends JpaRepository<IssuedBooks,Long>{
+
 	
 }

@@ -12,15 +12,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.cg.lms.entity.Courses;
-
 import com.cg.lms.exception.CourseNotFoundException;
-
 import com.cg.lms.model.CoursesDTO;
 
-import com.cg.lms.entity.CourseBooks;
 import com.cg.lms.repository.CourseRepository;
 import com.cg.lms.service.CourseService;
-
 import com.cg.lms.utils.CourseUtils;
 
 
@@ -47,8 +43,6 @@ public class CourseServiceImpl implements CourseService {
 		return courseRepository.save(course);
 	}
 	
-
-	
 	@Override
 	public ResponseEntity<Object> deleteCourseById(Integer userId) throws CourseNotFoundException {
 		logger.info("entered service in delete courses");
@@ -58,12 +52,12 @@ public class CourseServiceImpl implements CourseService {
     		return ResponseEntity.ok().build();
     	}).orElseThrow(()-> new CourseNotFoundException("CourseId "+courseID+" not found"));
     }
-	
 
-	@Override
+/*	@Override
 	public Courses updateCoursesById(Integer courseId, List<CourseBooks> coursebook) throws CourseNotFoundException {
 		logger.info("entered service in get all courses");
 		Optional<Courses> opt= courseRepository.findById((long)courseId);
+		
 		if(opt.isPresent())
 		{
 		Courses course = courseRepository.findById((long) courseId).get();
@@ -73,5 +67,51 @@ public class CourseServiceImpl implements CourseService {
 		else {
 			throw new CourseNotFoundException("Course is not present to be updated");
 		}
+	} */
+
+	@Override
+	public Courses updateCoursesById(Integer courseId,CoursesDTO coursedto ) throws CourseNotFoundException {
+		
+		logger.info("entered service in get all courses");
+		Optional<Courses> opt= courseRepository.findById((long)courseId);
+		Courses course = new Courses();
+		if(opt.isPresent())
+		{
+		  course.setId(coursedto.getId());
+		  course.setName(coursedto.getName());
+		  course.setTextBook(coursedto.getTextBook());
+		  course.setRefBook(coursedto.getRefBook());
+		  return courseRepository.save(course);
+		}
+		else {
+			throw new CourseNotFoundException("Course is not present to be updated");
+		}
+		
+	}
+
+	@Override
+	public CoursesDTO getCourseById(Integer courseId) throws CourseNotFoundException{
+		Optional<Courses> opt= courseRepository.findById((long)courseId);		
+		if(opt.isPresent()) {
+			Courses course= opt.get();
+			return CourseUtils.convertToCoursesDto(course);
+		}
+		else {
+			throw new CourseNotFoundException("Course not found for the given courseId");			
+		}
+	
+	}
+
+	@Override
+	public CoursesDTO getCourseByName(String name) throws CourseNotFoundException{
+		Courses course = courseRepository.findByName(name);		
+	    if(course == null) {
+	    	throw new CourseNotFoundException("Course not found for the given course name");
+	    }else
+	    {
+	    	return CourseUtils.convertToCoursesDto(course);
+	    }
+	
 	}
 }
+

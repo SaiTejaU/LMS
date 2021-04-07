@@ -4,15 +4,15 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class BookDTO {
-	private String bookId;
+	private long bookId;
 	private String bookName;
 	private String authorName;
 	private String bookDescription;
 	private Integer bookCount;
-	public String getBookId() {
+	public long getBookId() {
 		return bookId;
 	}
-	public void setBookId(String bookId) {
+	public void setBookId(long bookId) {
 		this.bookId = bookId;
 	}
 	public String getBookName() {

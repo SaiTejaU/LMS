@@ -5,10 +5,9 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.cg.lms.entity.Book;
 
-public interface BookRepository extends JpaRepository<Book, Integer>{
+public interface BookRepository extends JpaRepository<Book, Long>{
 	@Query("SELECT n FROM booktable n WHERE n.bookName = :name")
 	Book findByName(String name);
     @Query("select b from booktable b where b.authorName=:authorName")
 	Book findByAuthorName(String authorName);
-
 }

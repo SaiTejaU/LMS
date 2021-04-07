@@ -29,8 +29,8 @@ public class BookUtils {
 	}
 	public static BookDTO convertToBookDto(Book book) {
 		BookDTO bookdto = new BookDTO();
-		bookdto.setBookName(book.getBookName());
 		bookdto.setBookId(book.getBookId());
+		bookdto.setBookName(book.getBookName());
 		bookdto.setAuthorName(book.getAuthorName());
 		bookdto.setBookDescription(book.getBookDescription());
 		bookdto.setBookCount(book.getBookCount());

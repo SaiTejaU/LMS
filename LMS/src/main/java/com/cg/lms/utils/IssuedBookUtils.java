@@ -21,6 +21,7 @@ public class IssuedBookUtils {
 		book.setUserId(issuedbookdto.getUserId());
 		book.setDateIssued(issuedbookdto.getDateIssued());
 		book.setPenalty(issuedbookdto.getPenalty());
+		book.setBookName(issuedbookdto.getBookName());
 		return book;
 	}
 	public static IssuedBooksDTO convertToIssuedBooksDTO(IssuedBooks issuedbook) {
@@ -29,6 +30,7 @@ public class IssuedBookUtils {
 		bookdto.setUserId(issuedbook.getUserId());
 		bookdto.setDateIssued(issuedbook.getDateIssued());
 		bookdto.setPenalty(issuedbook.getPenalty());
+		bookdto.setBookName(issuedbook.getBookName());
 		return bookdto;
 	}
 		

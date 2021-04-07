@@ -3,6 +3,8 @@ package com.cg.lms.entity;
 import javax.persistence.Column;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -10,8 +12,8 @@ import javax.persistence.Table;
 @Table(name="booktable")
 public class Book {
 	@Id
-	@Column(name="bookid")
-	private String bookId;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private long bookId;
 	@Column(name="bookname")
 	private String bookName;
 	@Column(name="authorname")
@@ -21,11 +23,11 @@ public class Book {
 	@Column(name="bookcount")
 	private Integer bookCount;
 	
-	public String getBookId() {
+	public long getBookId() {
 		return bookId;
 	}
 	
-	public void setBookId(String bookId) {
+	public void setBookId(long bookId) {
 		this.bookId = bookId;
 	}
 

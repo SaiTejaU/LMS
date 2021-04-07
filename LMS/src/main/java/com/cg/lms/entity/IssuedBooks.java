@@ -11,7 +11,15 @@ import javax.persistence.Table;
 public class IssuedBooks {
 	@Id
 	@Column(name="bookid",unique=true)
-	private String bookId;
+	private long bookId;
+	@Column(name="bookname")
+	private String bookName;
+	public String getBookName() {
+		return bookName;
+	}
+	public void setBookName(String bookName) {
+		this.bookName = bookName;
+	}
 	@Column(name="userid")
 	private String userId;
 	@Column(name="dateissued")
@@ -24,11 +32,11 @@ public class IssuedBooks {
 	public void setPenalty(Double penalty) {
 		this.penalty = penalty;
 	}
-	public String getBookId() {
+	public long getBookId() {
 		return bookId;
 	}
-	public void setBookId(String bookId) {
-		this.bookId = bookId;
+	public void setBookId(long l) {
+		this.bookId = l;
 	}
 	public String getUserId() {
 		return userId;

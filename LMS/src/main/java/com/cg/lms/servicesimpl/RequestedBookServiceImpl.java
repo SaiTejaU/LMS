@@ -7,9 +7,11 @@ import javax.transaction.Transactional;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.cg.lms.entity.RequestedBook;
+import com.cg.lms.exception.UserNotFoundException;
 import com.cg.lms.model.RequestedBookDTO;
 import com.cg.lms.repository.RequestedBookRepository;
 import com.cg.lms.service.RequestedBookService;
@@ -40,6 +42,11 @@ public class RequestedBookServiceImpl implements RequestedBookService {
 		return RequestedBookUtils.convertToBookDtoList(newbook);
 	}
 	     
-	
+	public ResponseEntity<Object> handleRequest(Long Id) {
+    	return newbookrepository.findById(Id).map(book ->{
+    		newbookrepository.delete(book);
+    		return ResponseEntity.ok().build();
+    	}).orElseThrow(()-> new UserNotFoundException("Request not found"));
+    }
             
 }

@@ -2,6 +2,7 @@ package com.cg.lms.servicesimpl;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,16 @@ public class BookServiceImpl implements BookService{
 	BookRepository repo;
 	@Autowired
 	IssuedBooksRepository issuedrepo;
-	
+	 public BookDTO getBookById(Long bookId) throws BookNotFoundException{
+	    	Optional<Book> opt= repo.findById(bookId);		
+			if(opt.isPresent()) {
+				Book book= opt.get();
+				return BookUtils.convertToBookDto(book);
+			}
+			else {
+				throw new BookNotFoundException("Book not found for the given book Id");			
+			}
+	    }
 	public List<BookDTO> getBooks() {
 		List<Book> booklist= repo.findAll();
 		return BookUtils.convertToBookDtoList(booklist);
@@ -43,7 +53,6 @@ public class BookServiceImpl implements BookService{
 		//return repo.save(BookUtils.convertToBook((BookDTO) bookdto));
 		
 	}
-	
 	public BookDTO getBookByname(String name) throws BookNotFoundException {
 		Book book= repo.findByName(name);
 		if(book==null) {
@@ -62,29 +71,50 @@ public class BookServiceImpl implements BookService{
 			return BookUtils.convertToBookDto(book);
 		}	
 	}
-	public IssuedBooksDTO getBookIssued(String bookname) throws BookNotFoundException, NoBooksLeftException 
+	public IssuedBooksDTO getBookIssued(Long id) throws BookNotFoundException, NoBooksLeftException 
 	{
-		Book book=repo.findByName(bookname);
-		if(book==null)
-			throw new BookNotFoundException("Book not found with that name!");
-		else if(book.getBookCount()==0)
-			throw new NoBooksLeftException("All are issued!");
-		else {
-			IssuedBooksDTO issuedbookdto=new IssuedBooksDTO();
-			issuedbookdto.setBookId(book.getBookId());
-			issuedbookdto.setUserId("Dummy");
-			issuedbookdto.setDateIssued(new Date(System.currentTimeMillis()).toString());
-			issuedbookdto.setPenalty(0.0);
-			issuedrepo.save(IssuedBookUtils.convertToIssuedBooks(issuedbookdto));
-			book.setBookCount(book.getBookCount()-1);
-			this.repo.save(book);
-			return issuedbookdto;
+		Optional<Book> opt=repo.findById(id);
+		if(opt.isPresent()) {
+			Book book=opt.get();
+			if(book==null)
+				throw new BookNotFoundException("Book not found with that name!");
+			else if(book.getBookCount()==0)
+				throw new NoBooksLeftException("All are issued!");
+			else if(!issuedrepo.existsById(id)){
+				IssuedBooksDTO issuedbookdto=new IssuedBooksDTO();
+				issuedbookdto.setBookId(book.getBookId());
+				issuedbookdto.setBookName(book.getBookName());
+				issuedbookdto.setUserId("Dummy");
+				issuedbookdto.setDateIssued(new Date(System.currentTimeMillis()).toString());
+				issuedbookdto.setPenalty(0.0);
+				issuedrepo.save(IssuedBookUtils.convertToIssuedBooks(issuedbookdto));
+				book.setBookCount(book.getBookCount()-1);
+				this.repo.save(book);
+				return issuedbookdto;
+			}
 		}
+		return null;
 	}
+	public Book updateBook(BookDTO bookdto) throws BookNotFoundException {
+    	Optional<Book> opt= repo.findById(bookdto.getBookId());
+    	Book book=new Book();
+    	if(opt.isPresent()) {  
+    		book.setBookId(bookdto.getBookId());
+    		book.setBookName(bookdto.getBookName());
+    		book.setAuthorName(bookdto.getAuthorName());
+    		book.setBookCount(bookdto.getBookCount());
+    		book.setBookDescription(bookdto.getBookDescription());
+        }          
+    else{
+    	throw new BookNotFoundException("BookId "+bookdto.getBookId()+" not found");
+    }       
+    repo.save(book);
+    return book;        
+}
 	@Override
 	public String returnBook(String bookname) throws BookNotIssuedError {
 		Book book=repo.findByName(bookname);
-		String id=book.getBookId();
+		Long id=book.getBookId();
 		IssuedBooksDTO bookdto=IssuedBookUtils.convertToIssuedBooksDTO(issuedrepo.findById(id).get());
 		if(!issuedrepo.existsById(id))
 		{

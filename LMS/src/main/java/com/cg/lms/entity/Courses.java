@@ -2,32 +2,35 @@ package com.cg.lms.entity;
 
 import javax.persistence.*;
 
-import java.util.*;
 
-
-@Entity
-@Table(name = "courses")
+@Entity(name="courses")
+@Table(name ="courses")
 public class Courses {
 
 	
 	
 	@Id
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
 	@Column(name = "course_name")
 	private String name;
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "cb_fk", referencedColumnName = "id")
-	List<CourseBooks> coursebook = new ArrayList<>();
+	@Column
+	private String textBook;
+	
+	@Column
+	private String refBook;
 	
 	public Courses() {
 	
 	
 }
-	public Courses(String name, Long id) {
+	public Courses(String name, Long id, String textBook, String refBook) {
 		this.name = name;
 		this.id=id;
+		this.textBook=textBook;
+		this.refBook = refBook;
 	}
 	
 	 public long getId() {
@@ -35,11 +38,18 @@ public class Courses {
 	    }
 
 	    
-		public List<CourseBooks> getCoursebook() {
-		return coursebook;
+		
+		public String getTextBook() {
+		return textBook;
 	}
-	public void setCoursebook(List<CourseBooks> coursebook) {
-		this.coursebook = coursebook;
+	public void setTextBook(String textBook) {
+		this.textBook = textBook;
+	}
+	public String getRefBook() {
+		return refBook;
+	}
+	public void setRefBook(String refBook) {
+		this.refBook = refBook;
 	}
 		public void setId(long id) {
 	        this.id = id;

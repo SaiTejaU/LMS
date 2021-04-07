@@ -2,12 +2,14 @@ package com.cg.lms.servicesimpl;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cg.lms.entity.IssuedBooks;
 import com.cg.lms.model.IssuedBooksDTO;
 import com.cg.lms.repository.IssuedBooksRepository;
 import com.cg.lms.service.IssuedBooksService;
@@ -23,14 +25,11 @@ public class IssuedBooksServiceImpl implements IssuedBooksService{
 	int limitDays=14;
 	Double finePerDay=5.0;
 	
-	@Override
-	public List<IssuedBooksDTO> getAllIssuedBooks() {
-		return IssuedBookUtils.convertToIssuedBookDtoList(issuedrepo.findAll());
-	}
 
 	@Override
-	public void calulatePenalties() throws ParseException {
-		for(IssuedBooksDTO book:getAllIssuedBooks())
+	public List<IssuedBooksDTO> calulatePenalties() throws ParseException {
+		List<IssuedBooksDTO> defaulters=new ArrayList<IssuedBooksDTO>();
+		for(IssuedBooksDTO book:IssuedBookUtils.convertToIssuedBookDtoList(issuedrepo.findAll()))
 		{
 			Date issueDate=dateFormat.parse(book.getDateIssued());
 			Date today=new Date(System.currentTimeMillis());
@@ -38,7 +37,13 @@ public class IssuedBooksServiceImpl implements IssuedBooksService{
 			{
 				book.setPenalty(book.getPenalty()+((today.getTime()-issueDate.getTime())/1000/60/60/24)*finePerDay);
 				issuedrepo.save(IssuedBookUtils.convertToIssuedBooks(book));
+				defaulters.add(book);
 			}
 		}
+		return defaulters;
+	}
+	public List<IssuedBooksDTO> issuedBooks(){
+		List<IssuedBooks> books= issuedrepo.findAll();
+		return IssuedBookUtils.convertToIssuedBookDtoList(books);
 	}
 }

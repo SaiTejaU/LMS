@@ -6,6 +6,5 @@ import java.util.List;
 import com.cg.lms.model.IssuedBooksDTO;
 
 public interface IssuedBooksService {
-	public List<IssuedBooksDTO> getAllIssuedBooks();
-	public void calulatePenalties() throws ParseException;
+	public List<IssuedBooksDTO> calulatePenalties() throws ParseException;
 }

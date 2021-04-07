@@ -39,7 +39,7 @@ class BookControllerTest {
 	void setUp() throws Exception {
 		MockitoAnnotations.openMocks(this);
 		bookdto=new BookDTO();
-		bookdto.setBookId("101");
+		bookdto.setBookId(101);
 		bookdto.setAuthorName(AUTHOR_NAME);
 		bookdto.setBookCount(20);
 		bookdto.setBookDescription("Year of Publication:2002");
@@ -74,14 +74,14 @@ class BookControllerTest {
 	void testGetAllBook()
 	{
 		Book book1=new Book();
-		book1.setBookId("100");
+		book1.setBookId(10);
 		book1.setBookName("Structural Analysis");
 		book1.setAuthorName("Teraja");
 		book1.setBookCount(20);
 		book1.setBookDescription("Year of Publication:2000");
 		
 		Book book2=new Book();
-		book1.setBookId("120");
+		book1.setBookId(120);
 		book1.setBookName("Structure of Materials");
 		book1.setAuthorName("Agarwal");
 		book1.setBookCount(23);
@@ -100,14 +100,14 @@ class BookControllerTest {
 	@Test
 	void testaddnewbook() {
 		Book book1=new Book();
-		book1.setBookId("100");
+		book1.setBookId(100);
 		book1.setBookName("Structural Analysis");
 		book1.setAuthorName("Teraja");
 		book1.setBookCount(20);
 		book1.setBookDescription("Year of Publication:2000");
 		
 		Book book2=new Book();
-		book2.setBookId("120");
+		book2.setBookId(120);
 		book2.setBookName("Structure of Materials");
 		book2.setAuthorName("Agarwal");
 		book2.setBookCount(23);

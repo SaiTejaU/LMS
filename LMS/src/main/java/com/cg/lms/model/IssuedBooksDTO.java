@@ -5,15 +5,22 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class IssuedBooksDTO {
-	private String bookId;
+	private long bookId;
+	private String bookName;
+	public String getBookName() {
+		return bookName;
+	}
+	public void setBookName(String bookName) {
+		this.bookName = bookName;
+	}
 	private String userId;
 	private String dateIssued;
 	private Double penalty;
-	public String getBookId() {
+	public long getBookId() {
 		return bookId;
 	}
-	public void setBookId(String string) {
-		this.bookId = string;
+	public void setBookId(long bookId) {
+		this.bookId = bookId;
 	}
 	public String getUserId() {
 		return userId;

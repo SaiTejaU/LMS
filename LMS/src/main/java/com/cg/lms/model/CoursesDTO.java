@@ -1,17 +1,16 @@
 package com.cg.lms.model;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.cg.lms.entity.CourseBooks;
+
 
 @Component
 public class CoursesDTO {
     private long id;
     private String name;
-    List<CourseBooks> coursebook = new ArrayList<>();
+    private String textBook;
+    private String refBook;
 	public long getId() {
 		return id;
 	}
@@ -24,13 +23,21 @@ public class CoursesDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public List<CourseBooks> getCoursebook() {
-		return coursebook;
+	public String getTextBook() {
+		return textBook;
 	}
-	public void setCoursebook(List<CourseBooks> coursebook) {
-		this.coursebook = coursebook;
+	public void setTextBook(String textBook) {
+		this.textBook = textBook;
 	}
+	public String getRefBook() {
+		return refBook;
+	}
+	public void setRefBook(String refBook) {
+		this.refBook = refBook;
+	}
+	
 	
 	
 	
 }
+
