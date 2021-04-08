@@ -114,6 +114,7 @@ class BookControllerTest {
 		book2.setBookDescription("Year of Publication:2001");
 		
 	
+		@SuppressWarnings({ "unused", "unchecked" })
 		OngoingStubbing<List<BookDTO>> thenReturn = when(service.getBooks()).thenReturn((List<BookDTO>) book1);
 		assertThat(service.getBooks()).isEqualTo(book2);
 	}

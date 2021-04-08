@@ -1,7 +1,6 @@
 package com.cg.lms.servicesImpl;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,13 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.cg.lms.entity.Book;
-import com.cg.lms.entity.CourseBooks;
 import com.cg.lms.entity.Courses;
 import com.cg.lms.entity.RequestedBook;
 import com.cg.lms.exception.CourseNotFoundException;
 import com.cg.lms.model.RequestedBookDTO;
 import com.cg.lms.repository.CourseRepository;
-import com.cg.lms.servicesimpl.CourseServiceImpl;
 import com.cg.lms.utils.RequestedBookUtils;
 
 @SpringBootTest
@@ -28,8 +25,7 @@ class CourseServiceImplTest {
 	@Autowired
 	private CourseRepository courserepo;
 	
-	@Autowired
-	private CourseServiceImpl courseservice;
+	
 	
 	
 	@BeforeEach
@@ -39,6 +35,7 @@ class CourseServiceImplTest {
 	@Test
 	void testGetAllCourses() {
 		
+		@SuppressWarnings("unused")
 		List<Book> book1 = new ArrayList<Book>();
 		//book1 = [("","R D")];
 		Courses course1 = new Courses();
@@ -63,20 +60,16 @@ class CourseServiceImplTest {
 		//fail("Not yet implemented");
 	}
 
-	@SuppressWarnings("deprecation")
+	
 	@Test
 	void testDeleteCourseById() throws CourseNotFoundException {
-		CourseBooks coursebook1 = new CourseBooks();
-		coursebook1.setId(1);
-		coursebook1.setName("Harry");
-		CourseBooks coursebook2 = new CourseBooks();
-		coursebook2.setId(2);
-		coursebook2.setName("Potter");
-		List<CourseBooks> list = new ArrayList<>();
+		String coursebook1 ="Harry";
+		String coursebook2 ="Potter";
 		Courses course1 = new Courses();
 		course1.setId(1L);
 		course1.setName("Fun");
-		course1.setCoursebook(list);
+		course1.setRefBook(coursebook1);
+		course1.setTextBook(coursebook2);
 		
 		Mockito.when(courserepo.save(course1)).thenReturn(course1);
         Mockito.when(courserepo.findById(1L).get()).thenReturn(course1);

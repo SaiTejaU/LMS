@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import com.cg.lms.entity.CourseBooks;
 import com.cg.lms.entity.Courses;
 import com.cg.lms.entity.RequestedBook;
 import com.cg.lms.model.CoursesDTO;
@@ -43,46 +42,15 @@ class CourseControllerTest {
 		MockitoAnnotations.openMocks(this);
 	}
 
-	
-	@Test
-	void testGetAllCourses() {
-		CourseBooks coursebook1 = new CourseBooks();
-		coursebook1.setId(1);
-		coursebook1.setName("Harry");
-		CourseBooks coursebook2 = new CourseBooks();
-		coursebook2.setId(2);
-		coursebook2.setName("Potter");
-		List<CourseBooks> list = new ArrayList<>();
-		Courses course1 = new Courses();
-		course1.setId(1L);
-		course1.setName("Fun");
-		course1.setCoursebook(list);
-		Courses course2 = new Courses();
-		course2.setId(2L);
-		course2.setName("Enjoy");
-		course2.setCoursebook(list);
-		List<CoursesDTO> list1 = new ArrayList<>();
-		list1.add(CourseUtils.convertToCoursesDto(course1));
-		list1.add(CourseUtils.convertToCoursesDto(course2));
-		when(courseservice.getAllCourses()).thenReturn(list1);
-		assertThat(courseservice.getAllCourses()).isEqualTo(list1);
-		
-		//fail("Not yet implemented");
-	}
-
 	@Test
 	void testCreateCourse() {
-		CourseBooks coursebook1 = new CourseBooks();
-		coursebook1.setId(1);
-		coursebook1.setName("Harry");
-		CourseBooks coursebook2 = new CourseBooks();
-		coursebook2.setId(2);
-		coursebook2.setName("Potter");
-		List<CourseBooks> list = new ArrayList<>();
+		String coursebook1="Harry";
+		String coursebook2="Potter";
 		Courses course1 = new Courses();
 		course1.setId(1L);
 		course1.setName("Fun");
-		course1.setCoursebook(list);
+		course1.setRefBook(coursebook1);
+		course1.setTextBook(coursebook2);
 		CoursesDTO course2 = CourseUtils.convertToCoursesDto(course1);
 		when(courseservice.createCourse(course2)).thenReturn(course1);
 		assertThat(courseservice.createCourse(course2)).isEqualTo(course1);
