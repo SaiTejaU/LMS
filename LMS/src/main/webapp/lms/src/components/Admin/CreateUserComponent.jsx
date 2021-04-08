@@ -41,6 +41,15 @@ class CreateUserComponent extends Component{
             password: this.state.password,
             contactno: this.state.contactno 
         };
+        let emailcheck=this.state.email;
+        let pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+        if(!pattern.test(emailcheck))
+            alert("Enter a valid email id");
+        let num=this.state.contactno;
+        let numbers = new RegExp(/^[0-9]+$/);        
+        if(!num.match(numbers) || num.length!==10)
+            alert("Enter a 10 digit valid contact number");
+        
         console.log('user => ' + JSON.stringify(user));
 
         if(this.state.str === '_add'){            

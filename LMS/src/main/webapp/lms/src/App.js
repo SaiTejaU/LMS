@@ -37,10 +37,10 @@ function App() {
             <Switch>
               <Route path="/" exact component={Home}/>
               <Route path="/admin" exact component={AdminWelcome}/>
-              <Route path="/admin/add-user/:id" exact component={CreateUser}/>
+              <Route path="/admin/add-user/:str" exact component={CreateUser}/>
               <Route path="/admin/getallusers" exact component={ListUsers}/>
-              <Route path="/admin/view-user/:id" exact component={ViewUser}/>
-              <Route path="/admin/update-user/:id" exact component={UpdateUsers}/>
+              <Route path="/admin/view-user/:userId" exact component={ViewUser}/>
+              <Route path="/admin/update-user/:userId" exact component={UpdateUsers}/>
               <Route path="/librarian" exact component={LibrarianWelcome}/>
               <Route path="/student" exact component={StudentWelcome}/>
               <Route path="/student/viewbooks" exact component={()=>

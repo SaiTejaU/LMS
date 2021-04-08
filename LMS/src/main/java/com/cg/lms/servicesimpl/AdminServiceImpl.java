@@ -98,7 +98,7 @@ public class AdminServiceImpl {
         else{
         	throw new UserNotFoundException("UserId "+userId+" not found");
         }       
-        repo.flush();
+        repo.save(user);
         return user;        
     }
     

@@ -30,7 +30,10 @@ export default class AddBook extends Component
             bookDescription:this.state.bookDescription,
             bookCount:this.state.bookCount
         };
-        axios.post("http://localhost:8083/library/addnewbook",book)
+        let count=this.state.bookCount;
+        if(isNaN(count) || count<0)
+            alert("Enter valid book count");
+        axios.post("http://localhost:8086/library/addnewbook",book)
             .then(response => {
                 if(response.data!=null)
                 {
